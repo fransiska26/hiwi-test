@@ -8,6 +8,17 @@ services:
       dockerfile: Dockerfile
     depends_on:
       - kafka
+  
+  dataconsumer:
+    build:
+      context: .
+      dockerfile: Dockerfile_consumer
+    ports:
+      - "5000:5000"
+    environment:
+      - NAME=World
+    depends_on:
+      - kafka 
 
   kafdrop:
     image: obsidiandynamics/kafdrop:3.31.0
