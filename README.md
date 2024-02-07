@@ -2,7 +2,7 @@
 
 ## Description
 
-This is a simple data generator mocking a GPGGA data source. The datasource is then proccessed to an kafka-server (`hiwi-test-kafka-1:29092`)
+This is a simple data generator mocking a GPGGA data source. The datasource is then proccessed to an kafka-server (`hiwi-test-kafka-1:29092`). 
 
 ## Task
 Please provide a service that subscribes to the Kafka topic `location_topic` and visualize the data on a map. A containerized solution is preferred. You may extend the service to provide additional features like filtering, some additional visualization, etc. You may use any programming language, any framework, or any library. 
@@ -15,6 +15,30 @@ AC:
 
 Question to be answered:
 * What object can be expected to move with that trajectory?
+
+## What Have Been Done
+The task is done by processing the data with a Flask application, and visualizing it on a live-updating map.
+
+The components added to this project are as follows:
+- A Flask application that consumes the GPS data from the Kafka server and processes it.
+- A live map visualization built with Plotly, which displays the processed GPS data.
+
+### Flask Application
+
+The Flask application consumes data from the Kafka server, processes it, and serves a web interface for visualization. The application subscribes to the Kafka topic, decodes the messages, and updates the live map.
+
+### Live Map Visualization
+
+The live map is a web-based visualization that displays the GPS data in real-time. It is accessible via a web browser and updates automatically as new data is processed by the Flask application.
+
+## How to Access the Live Map
+
+To access the live map visualization:
+
+1. Ensure that the Flask application is running. It should be set up to consume data from the Kafka server and serve the web interface on a specified port.
+2. Open your web browser and navigate to the IP address and port where the Flask application is hosted at [http://localhost:5000/](http://localhost:5000/).
+3. The map should be visible and updating in real-time as new GPS data is processed.
+
 
 ## Installation
 
