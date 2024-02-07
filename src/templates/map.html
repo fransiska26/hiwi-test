@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Live Map</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+
+<div id="map"></div>
+
+<script>
+function fetchData() {
+    fetch('/data')
+        .then(response => response.json())
+        .then(data => {
+            Plotly.react('map', data.data, data.layout);
+        })
+        .catch(error => console.error('Error fetching data:', error));
+}
+
+// Initial fetch
+fetchData();
+
+// Update the map every 5 seconds
+setInterval(fetchData, 5000);
+</script>
+
+</body>
+</html>
