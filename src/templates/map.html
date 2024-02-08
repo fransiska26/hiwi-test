@@ -28,15 +28,13 @@ function fetchData() {
 
     const startDateTime = startDate && startTime ? `${startDate}T${startTime}` : '';    
     const endDateTime = endDate && endTime ? `${endDate}T${endTime}` : '';
-    /*
-    FOR FURTHER IMPROVEMENT 
-    const endDateTime = endDate && endTime && Date.parse(startDateTime)/1000<Date.parse(endDateTime)/1000 ? `${endDate}T${endTime}` : '';
-    
-    if (Date.parse(startDateTime/1000)>Date.parse(endDateTime)/1000)){
-        resetEndDatetimeInput();
+
+    if (startDateTime && endDateTime && new Date(startDateTime) > new Date(endDateTime)) {
+        alert('Start date and time must be earlier than end date and time.');
+        resetInputs();
+        return;
     }
-    */
-    //console.table(Date.parse(startDateTime/1000))
+
     let queryString = '';
     if (startDateTime && endDateTime) {
         queryString = `?start=${encodeURIComponent(startDateTime)}&end=${encodeURIComponent(endDateTime)}`;
