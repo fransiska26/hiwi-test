@@ -7,15 +7,64 @@
 <body>
 
 <div id="map"></div>
-
+<!-- Date and time inputs -->
+Start Date: <input type="date" id="start-date">
+Start Time: <input type="time" id="start-time" step="1">
+End Date: <input type="date" id="end-date">
+End Time: <input type="time" id="end-time" step="1">
+<button onclick="fetchData()">Filter Data</button>
+<button onclick="resetInputs()">Reset</button>
 <script>
+
+
 function fetchData() {
-    fetch('/data')
+    // Get the date and time values from the inputs
+    const startDate = document.getElementById('start-date').value;
+    const startTime = document.getElementById('start-time').value;
+    const endDate = document.getElementById('end-date').value;
+    const endTime = document.getElementById('end-time').value;
+
+    
+
+    const startDateTime = startDate && startTime ? `${startDate}T${startTime}` : '';    
+    const endDateTime = endDate && endTime ? `${endDate}T${endTime}` : '';
+    /*
+    FOR FURTHER IMPROVEMENT 
+    const endDateTime = endDate && endTime && Date.parse(startDateTime)/1000<Date.parse(endDateTime)/1000 ? `${endDate}T${endTime}` : '';
+    
+    if (Date.parse(startDateTime/1000)>Date.parse(endDateTime)/1000)){
+        resetEndDatetimeInput();
+    }
+    */
+    //console.table(Date.parse(startDateTime/1000))
+    let queryString = '';
+    if (startDateTime && endDateTime) {
+        queryString = `?start=${encodeURIComponent(startDateTime)}&end=${encodeURIComponent(endDateTime)}`;
+        console.table(queryString);
+    }
+
+    // Fetch the data from the Flask backend
+    fetch('/data' + queryString)
         .then(response => response.json())
-        .then(data => {
-            Plotly.react('map', data.data, data.layout);
-        })
+        .then(figure => {
+        Plotly.newPlot('map', figure.data, figure.layout);})
         .catch(error => console.error('Error fetching data:', error));
+}
+
+function resetStartDatetimeInput(){
+    document.getElementById('start-date').value='';
+    document.getElementById('start-time').value='';
+}
+
+function resetEndDatetimeInput(){
+    document.getElementById('end-date').value='';
+    document.getElementById('end-time').value='';
+}
+
+function resetInputs(){
+    resetStartDatetimeInput();
+    resetEndDatetimeInput();
+    fetchData();
 }
 
 // Initial fetch

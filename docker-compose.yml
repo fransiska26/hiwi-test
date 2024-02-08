@@ -14,7 +14,7 @@ services:
       context: .
       dockerfile: Dockerfile_consumer
     ports:
-      - "5000:5000"
+      - "5001:5001"
     environment:
       - NAME=World
     depends_on:
