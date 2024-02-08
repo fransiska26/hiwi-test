@@ -36,7 +36,7 @@ The live map is a web-based visualization that displays the GPS data in real-tim
 To access the live map visualization:
 
 1. Ensure that the Flask application is running. It should be set up to consume data from the Kafka server and serve the web interface on a specified port.
-2. Open your web browser and navigate to the IP address and port where the Flask application is hosted at [http://localhost:5000/](http://localhost:5000/).
+2. Open your web browser and navigate to the IP address and port where the Flask application is hosted at [http://localhost:5001/](http://localhost:5001/).
 3. The map should be visible and updating in real-time as new GPS data is processed.
 
 
