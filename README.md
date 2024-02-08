@@ -14,7 +14,7 @@ AC:
 * [ ] The service should be containerized
 
 Question to be answered:
-* What object can be expected to move with that trajectory? **--something like exploration robot, maybe a rover? (keyword from the message key)**
+* What object can be expected to move with that trajectory? **--something like mobile robot, maybe a rover? (keyword from the message key)**
 
 ## What Have Been Done
 The task is done by processing the data with a Flask application, and visualizing it on a live-updating map.
